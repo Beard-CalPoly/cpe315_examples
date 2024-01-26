@@ -4,9 +4,11 @@
 	.align	2
 	.global	myfunc
 	.type	myfunc, %function
+// Add 7 to the argument
 myfunc:
-.LFB0:
-	.cfi_startproc
+    // This function doesn't need to kill all the temps
+    // but it does because that is totally legal according 
+    // to the calling convetion 
     mov w1, 0xDEAD
     mov w2, 0xDEAD
     mov w3, 0xDEAD
@@ -24,10 +26,9 @@ myfunc:
     mov w15, 0xDEAD
 
 	ldr	w1, [x0]
-	add	w1, w1, 7
+	add	w1, w1, 3
 	str	w1, [x0]
 	ret
-	.cfi_endproc
 .LFE0:
 	.size	myfunc, .-myfunc
 	.ident	"GCC: (GNU) 4.8.5 20150623 (Red Hat 4.8.5-44)"
